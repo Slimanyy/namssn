@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Avatar } from "../assets";
-import { useState } from "react";
 
 const HeaderComponent = ({ title, url }) => {
 	const dispatch = useDispatch();
