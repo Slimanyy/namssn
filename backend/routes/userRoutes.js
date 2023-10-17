@@ -1,6 +1,3 @@
-import * as fs from "fs";
-import { fileURLToPath } from 'url';
-import path from 'path'
 import express from "express";
 
 // Create an instance of an Express Router to define routes.
@@ -27,6 +24,7 @@ import {
   deleteUserResources,
   postUserPayment,
   getUserPayment,
+  getPaymentOptions
 } from "../controllers/userController.js";
 
 import { 
@@ -41,8 +39,6 @@ import {
   createPostComment,
   updatePostComment,
   deletePostComment,
-  upvoteComment,
-  downvoteComment,
 } from "../controllers/postController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
@@ -158,12 +154,6 @@ router
   .put(protect, updatePostComment)
   .delete(protect, deletePostComment);
 
-// Route for upvoting a post comment
-router.put('/posts/:postId/comments/:commentId/upvote', protect, upvoteComment);
-
-// Route for downvoting a post comment
-router.put('/posts/:postId/comments/:commentId/downvote', protect, downvoteComment);
-
 /**
  * GET, POST, PUT, and DELETE user resources.
  * @route GET /api/v1/users/resources
@@ -173,15 +163,15 @@ router.put('/posts/:postId/comments/:commentId/downvote', protect, downvoteComme
  * @access Private (Requires authentication)
  */
 
-// router
-//   .route('/resources')
-//   .get(protect, getUserResources)
-//   .post(protect, postUserResources);
+router
+  .route('/resources')
+  .get(protect, getUserResources)
+  .post(protect, postUserResources);
 
-// router
-//   .route('/resources/:resourceId')
-//   .put(protect, updateUserResources)
-//   .delete(protect, deleteUserResources);
+router
+  .route('/resources/:resourceId')
+  .put(protect, updateUserResources)
+  .delete(protect, deleteUserResources);
 
 /**
  * Get all blogs and blogs by user.
@@ -206,8 +196,10 @@ router
  */
 router
   .route('/payments')
-  .get(protect, getUserPayment)
+  .get(protect, getPaymentOptions)
+  // .get(protect, getUserPayment)
   .post(protect,postUserPayment);
+
 
 router
   .route('/resources/:filename')

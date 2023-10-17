@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Avatar } from "../assets";
-import { useDispatch } from "react-redux";
-import { setNavOpen } from "../redux/slices/navSlice";
+import { useState } from "react";
 
 const HeaderComponent = ({ title, url }) => {
 	const dispatch = useDispatch();
@@ -17,29 +16,27 @@ const HeaderComponent = ({ title, url }) => {
 		setSearch("");
 	};
 
-	// handle nav open with redux
-	const handleNavOpen = () => {
-		dispatch(setNavOpen());
-	};
-
 	return (
-		<div className="flex flex-row md:justify-between items-center p-5 md:py-2 border-b-2 border-gray-300 ">
-			<h1 className="text-xl text-center w-full md:text-3xl">{title}</h1>
-			<img
-				src={Avatar}
-				alt="avatar"
-				className="lg:hidden cursor-pointer"
-				onClick={handleNavOpen}
-			/>
-			{url && (
-				<form
-					action=""
-					onSubmit={handleSubmit}
-					className="hidden md:flex  relative"
-				>
-					<input
-						type="text"
-						placeholder="Search"
+		<div className="flex flex-row md:justify-between items-center p-5 md:py-2 border-b-2 border-gray-300">
+			<img src={Avatar} alt="avatar" className="md:hidden" />
+
+			<div className="flex flex-row md:justify-between items-center p-5 md:py-2 border-b-2 border-gray-300 ">
+				<h1 className="text-xl text-center w-full md:text-3xl">{title}</h1>
+				<img
+					src={Avatar}
+					alt="avatar"
+					className="lg:hidden cursor-pointer"
+					onClick={handleNavOpen}
+				/>
+				{url && (
+					<form
+						action=""
+						onSubmit={handleSubmit}
+						className="hidden md:flex  relative"
+					>
+						<input
+							type="text"
+							placeholder="Search"
 						name="search"
 						value={search}
 						className="rounded-2xl border-gray-300 border-2 p-1 w-56 md:w-72 pl-10"
@@ -49,6 +46,7 @@ const HeaderComponent = ({ title, url }) => {
 				</form>
 			)}
 		</div>
+		</div>	
 	);
 };
 

@@ -1,9 +1,11 @@
-import PaymentForm from "../components/Payment";
+// import PaymentForm from "../components/Payment";
+import { PaymentList } from "../components";
 
 const PaymentPage = () => {
     return (
         <div>
-            <PaymentForm />
+            <PaymentList />
+            {/* <PaymentForm /> */}
         </div>
     );
     }
